@@ -1,0 +1,18 @@
+{
+  "name": "webgl-canvas",
+  "version": "0.0.1",
+  "description": "Simple library to create a canvas with a WebGL Rendering Context",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Stian M.",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-loader": "^4.5.0",
+    "typescript": "^3.0.1",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  }
+}
