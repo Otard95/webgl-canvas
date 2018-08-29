@@ -1,7 +1,9 @@
 import {Utils} from './Utils';
+import { Status } from './Status';
 
 export class Shader {
   
+  status: Status;
   gl_shader_type: number;
   shader_type: string;
   file_name: string | null;
@@ -10,9 +12,20 @@ export class Shader {
   
   constructor(file_or_src: string, shader_type: number = -1) {
     
+    this.status = Status.SDR_NO_SRC;
     this.gl_shader = null;
     this.gl_shader_type = shader_type;
-    this.shader_type = 'Unknown';
+    switch (this.gl_shader_type) {
+      case WebGLRenderingContext.VERTEX_SHADER:
+        this.shader_type = 'VERTEX_SHADER';
+        break;
+      case WebGLRenderingContext.FRAGMENT_SHADER:
+        this.shader_type = 'FRAGMENT_SHADER';
+        break;
+      default:
+        this.shader_type = 'Unknown';
+        
+    }
     
     // Test what `file_or_src` is
     if (/.+\.(?:vs|fs)/.test(file_or_src)) { // is file
@@ -21,6 +34,7 @@ export class Shader {
     } else { // its src
       this.src = file_or_src;
       this.file_name = null;
+      this.status = Status.SDR_NOT_LOADED;
     }
     
     if (this.file_name != null) {

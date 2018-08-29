@@ -1,0 +1,11 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "no-trailing-whitespace": false,
+    "space-before-function-paren": false,
+    "no-bitwise": false,
+    "quotemark": false,
+    "variable-name": [true, "allow-snake-case"],
+    "jsdoc-format": false
+  }
+}
