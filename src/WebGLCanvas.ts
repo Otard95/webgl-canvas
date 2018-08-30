@@ -8,6 +8,7 @@ export class WebGLCanvas {
   private shaderProgram: WebGLProgram | null;
   private shaders: Shader[];
   private program_info: ProgramInfo | null;
+  private position_buffer: WebGLBuffer | null;
 
   private width: number;
   private height: number;
@@ -16,6 +17,7 @@ export class WebGLCanvas {
 
     this.program_info = null;
     this.shaderProgram = null;
+    this.position_buffer = null;
     this.shaders = [];
     
     this.width = width;
@@ -25,6 +27,10 @@ export class WebGLCanvas {
     this.gl = this.init_gl_context();
 
   }
+  
+  /**
+   * ### Public methuds
+  */
   
   public add_shaders(...files: string[]) {
     
@@ -44,7 +50,6 @@ export class WebGLCanvas {
     } else {
       this.shaderProgram = tmp_prog;
     }
-    
 
     this.shaders.forEach((shader: Shader) => {
       this.gl.attachShader(this.shaderProgram, shader.gl_shader);
@@ -71,12 +76,22 @@ export class WebGLCanvas {
     
   }
   
-  public clear() {
-
-    // Set clear color
-    this.gl.clearColor(.2, .2, .2, 1);
-    // And klear the background
-    this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+  public init_buffers () {
+    
+    const tmp_buffer: WebGLBuffer | null = this.gl.createBuffer();
+    
+    if (tmp_buffer === null) {
+      throw new Error(`Unable to create position buffer.`);
+    }
+    this.position_buffer = tmp_buffer;
+    
+    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.position_buffer);
+    
+  }
+  
+  public render_shape (positions: number[]) {
+    
+    this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(positions), this.gl.STATIC_DRAW);
     
   }
   
@@ -93,6 +108,19 @@ export class WebGLCanvas {
     });
     
   }
+  
+  public clear() {
+
+    // Set clear color
+    this.gl.clearColor(.2, .2, .2, 1);
+    // And klear the background
+    this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+    
+  }
+  
+  /**
+   * ### Private methuds
+  */
   
   private create_canvas(): HTMLCanvasElement {
     
