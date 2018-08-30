@@ -4,7 +4,7 @@
   "description": "Simple library to create a canvas with a WebGL Rendering Context",
   "private": true,
   "scripts": {
-    "build": "webpack",
+    "build": "clear && webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Stian M.",

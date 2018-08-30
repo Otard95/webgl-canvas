@@ -6,6 +6,7 @@
     "no-bitwise": false,
     "quotemark": false,
     "variable-name": [true, "allow-snake-case"],
-    "jsdoc-format": false
+    "jsdoc-format": false,
+    "no-console": false
   }
 }

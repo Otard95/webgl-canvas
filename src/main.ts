@@ -1,7 +1,7 @@
 
 import {WebGLCanvas} from './WebGLCanvas'
 
-(()=>{
+(() => {
   
   let gl_canvas: WebGLCanvas;
   
@@ -11,8 +11,7 @@ import {WebGLCanvas} from './WebGLCanvas'
     
     gl_canvas.add_shaders(
       'shaders/vertex_shader.vs',
-      'shaders/fragment_shader.fs'
-    )
+      'shaders/fragment_shader.fs');
     
     gl_canvas.load_shaders();
     
@@ -20,11 +19,10 @@ import {WebGLCanvas} from './WebGLCanvas'
     
     // gl_canvas.initilize_shader_program();
     
-    setTimeout(()=>{
+    setTimeout(() => {
       gl_canvas.initilize_shader_program();
     }, 1000);
     
   });
   
 })();
-
